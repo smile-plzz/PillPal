@@ -1,0 +1,23 @@
+# Parcel files
+.parcel-cache
+dist
+src/
+public/index.html
+public/manifest.json
+parcel.config.json
+
+# Old build files
+styles/
+
+# Source files not needed
+*.config.js
+*.config.cjs
+
+# Dependencies
+node_modules/
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
