@@ -24,11 +24,11 @@ export default function Home() {
   const { toast } = useToast()
   const { medicines, saveMedicines } = useMedicines()
   const [showSettings, setShowSettings] = useState(false)
-  const appSettings = localStorage.getItem("app-settings")
-  const settings = appSettings ? JSON.parse(appSettings) : {}
+  const [settings, setSettings] = useState({})
 
   useEffect(() => {
-    autoBackup(medicines, settings)
+    const appSettings = localStorage.getItem("app-settings")
+    setSettings(appSettings ? JSON.parse(appSettings) : {})
 
     // Backup every 5 minutes
     const interval = setInterval(
