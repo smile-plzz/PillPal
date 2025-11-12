@@ -1,0 +1,7 @@
+feat: Enhance info button and optimize build
+
+- Updated the "TEST INFO BUTTON" to "Info" in public/index.html.
+- Modernized the info button's styling to align with the existing theme, including a Font Awesome icon.
+- Removed debug console.error statements related to the info button and modal from src/main.js.
+- Optimized the build for production using `npx parcel build`.
+- Updated .gitignore to exclude .parcel-cache and dist directories.

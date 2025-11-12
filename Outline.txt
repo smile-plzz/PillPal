@@ -1,0 +1,212 @@
+Medicine Tracker App – Detailed Outline
+
+Overview
+
+A user-friendly web application designed to help individuals manage their daily medication schedules. It features medicine tracking, integration with the RxNav API for drug information, and the ability to generate printable PDF schedules. The application emphasizes simplicity, responsiveness, and local data persistence using `localStorage`.
+
+
+
+Core Features
+
+1. Medicine Input
+
+
+
+
+
+Purpose: Allow users to input medication details for tracking.
+
+
+
+Components:
+
+
+
+
+
+Text Input for Medicine Name:
+
+
+
+
+
+Autocomplete-enabled input field.
+
+
+
+On input, fetch suggestions from RxNav API (e.g., /rxcui endpoint for drug names).
+
+
+
+Display up to 5 suggestions in a dropdown below the input.
+
+
+
+Users can select a suggestion or type a custom name (for non-API matches).
+
+
+
+Time Picker:
+
+
+
+
+
+Multiple time inputs (e.g., HH:MM AM/PM) per medicine.
+
+
+
+Add/remove time slots dynamically (e.g., "Add another time" button).
+
+
+
+Validation: Ensure valid time format and no duplicates for the same medicine.
+
+
+
+Duration Field (Optional):
+
+
+
+
+
+Numeric input for number of days (e.g., 7, 14, or indefinite).
+
+
+
+Default: Indefinite (no end date).
+
+
+
+Validation: Positive integers only or empty for indefinite.
+
+
+
+UI:
+    Form layout uses Tailwind CSS for responsiveness, with improved spacing and alignment.
+    Inputs styled with custom classes (`form-input`, `form-textarea`) for consistent appearance and focus states.
+    Buttons styled with custom classes (`btn-primary`, `btn-secondary`) for consistent look and feel.
+    "Add Medicine" button to submit the form and add to the schedule.
+    Enhanced accessibility with ARIA attributes and semantic HTML.
+
+
+
+Behavior:
+
+
+
+
+
+On form submission, validate inputs (non-empty name, at least one valid time).
+
+
+
+Store medicine data in localStorage as JSON array.
+
+
+
+Clear form after successful submission and refresh schedule display.
+
+2. Medicine Info Fetch
+
+Purpose: Provide accurate medicine information to enhance user understanding.
+
+API Integration:
+    Uses RxNav API (https://rxnav.nlm.nih.gov/) for drug data.
+    Endpoints: `/REST/drugs.json?name={query}` for autocomplete, `/REST/rxcui/{id}/allproperties.json` for detailed info.
+    Fetches on input (debounced for efficiency, e.g., 300ms delay).
+    Fallback: Displays "No information found. Please verify the medicine name." if API returns no data or fails.
+
+Data Displayed:
+    Usage: Brief description of the drug's purpose.
+    Category: Drug class.
+    Generic Name: Non-brand name.
+
+Behavior:
+    Stores fetched data with the medicine entry in `localStorage`.
+    Displays fetched data in the schedule table.
+    Handles API errors gracefully with user-friendly messages.
+
+3. Schedule Display
+
+Purpose: Show a clear, organized view of the user's medication schedule.
+
+Components:
+
+Dynamic Table:
+    Columns: Time, Medicine, Dosage, Instructions, Generic Name, Category, Description, Actions.
+    Rows: One per medicine-time combination, sorted by time of day (ascending).
+    Includes edit and delete buttons for each entry.
+
+UI:
+    Responsive table using Tailwind CSS, adapting to smaller screens with `overflow-x-auto`.
+    Improved visual styling for table headers and rows for better readability.
+    Edit/Delete buttons are visually distinct and accessible with `aria-label`.
+    Empty state message is clear and informative.
+
+Behavior:
+    Loads data from `localStorage` on page load.
+    Updates table dynamically after adding, editing, or deleting medicines.
+    Handles empty state gracefully.
+
+4. PDF Generation
+
+Purpose: Generate a clean, printable PDF schedule for offline use.
+
+Components:
+
+Button: "Download Schedule as PDF" (styled with Tailwind CSS `btn-secondary`).
+
+PDF Layout (using jsPDF):
+    Header: Title ("Medication Schedule"), current date.
+    Patient Information: Includes patient name, date of birth, contact, and allergies.
+    Doctor Information: Includes doctor's name and contact.
+    Table: Columns for Time, Medicine, Dosage, Instructions, Duration, Generic Name, Category, and Description (full text).
+    Footer: Disclaimer and generation timestamp.
+
+Behavior:
+    Uses jsPDF to create a single-page PDF.
+    Ensures table fits within A4 page size (auto-scaling).
+    Downloads automatically as `medication_schedule_{date}.pdf`.
+
+UI:
+    Patient name input field (optional, defaults to "Patient").
+    Button disabled if no medicines are added.
+    Improved layout and styling for patient and doctor information in the PDF.
+
+
+
+Optional Features
+
+1. LocalStorage
+
+Implementation:
+    Stores medicines as a JSON array in `localStorage` under key `medicineSchedule`.
+    Format: `[{ id: UUID, name: string, times: string[], duration: number|null, info: { usage: string, category: string, genericName: string } }, ...]`.
+    Loads on page initialization to populate the schedule table.
+    Updates on every add/edit/delete action.
+
+Error Handling:
+    Handles JSON parse errors (e.g., corrupted data) by resetting to empty array.
+    "Reset Schedule" button clears `localStorage` (with confirmation).
+
+2. Responsive Layout
+
+Implementation:
+    Utilizes Tailwind CSS responsive classes (e.g., `sm:`, `md:`, `lg:`) for adaptive layouts.
+    Form: Stacked on mobile, grid on desktop.
+    Table: Uses `overflow-x-auto` for horizontal scrolling on small screens, tabular on desktop.
+    PDF and Reset buttons: Stacked on mobile, inline on desktop.
+
+Print Optimization:
+    CSS media queries (`@media print`) hide UI elements (buttons, forms) during printing.
+    Ensures table scales properly for direct browser printing.
+
+3. Accessibility (A11y) Enhancements
+
+Implementation:
+    Semantic HTML5 elements (`<main>`, `<section>`, `<header>`) for better document structure.
+    `aria-labelledby` attributes link headings to their respective sections for screen readers.
+    `aria-label` attributes provide descriptive text for interactive elements like buttons.
+    Improved keyboard navigation and focus management for form inputs and interactive elements.
+    Ensured sufficient color contrast for text and UI elements.

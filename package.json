@@ -1,0 +1,57 @@
+{
+  "name": "medicinetracker",
+  "version": "2.0.0",
+  "description": "Smart medication management application with reminders, tracking, and comprehensive features",
+  "keywords": [
+    "medicine",
+    "medication",
+    "tracker",
+    "health",
+    "reminders",
+    "schedule",
+    "healthcare"
+  ],
+  "license": "ISC",
+  "author": "Md. Ismail Hossain",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node ./node_modules/parcel/lib/bin.js build public/index.html",
+    "clean": "rm -rf dist .parcel-cache",
+    "dev": "node ./node_modules/parcel/lib/bin.js public/index.html --open",
+    "start": "node ./node_modules/parcel/lib/bin.js serve public/index.html"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "dependencies": {
+    "@vercel/analytics": "latest",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "jspdf": "latest",
+    "jspdf-autotable": "latest",
+    "live-server": "^1.2.0",
+    "lucide-react": "^0.454.0",
+    "next": "16.0.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "recharts": "latest",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.15.4",
+    "@parcel/transformer-webmanifest": "^2.15.4",
+    "@types/node": "^22",
+    "@types/react": "19.2.3",
+    "@types/react-dom": "19.2.3",
+    "parcel": "^2.15.4",
+    "postcss": "^8.5",
+    "tailwindcss": "4.1.17",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
