@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ error: "Unknown action" }, { status: 400 })
   } catch (error) {
-    console.error("[v0] API error:", error)
+    console.error("API error:", error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Internal server error" },
       { status: 500 },

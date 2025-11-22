@@ -26,7 +26,7 @@ export function MedicineDetailsModal({ medicine, open, onOpenChange, onEdit }: M
       getAdverseEvents(medicine.name)
         .then((count) => setAdverseEvents(count))
         .catch((error) => {
-          console.error("[v0] Failed to fetch adverse events:", error)
+          console.error("Failed to fetch adverse events:", error)
           setAdverseEvents(0)
         })
         .finally(() => setLoadingEvents(false))

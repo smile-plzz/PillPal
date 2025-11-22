@@ -71,7 +71,7 @@ export async function searchMedicines(query: string): Promise<string[]> {
     // Return top 10 suggestions
     return drugs.slice(0, 10).map((d: any) => d.drugName || d.name)
   } catch (error) {
-    console.error("[v0] Failed to fetch medicine suggestions:", error)
+    console.error("Failed to fetch medicine suggestions:", error)
     return []
   }
 }
@@ -114,7 +114,7 @@ export async function getMedicineDetails(medicineName: string): Promise<Medicine
     // If NDC search fails, try labeling API for more detailed information
     return await getMedicineDetailsByLabeling(medicineName)
   } catch (error) {
-    console.error("[v0] Failed to fetch medicine details from NDC:", error)
+    console.error("Failed to fetch medicine details from NDC:", error)
     // Fallback to labeling API
     return getMedicineDetailsByLabeling(medicineName)
   }
@@ -158,7 +158,7 @@ async function getMedicineDetailsByLabeling(medicineName: string): Promise<Medic
 
     return null
   } catch (error) {
-    console.error("[v0] Failed to fetch medicine details from labeling:", error)
+    console.error("Failed to fetch medicine details from labeling:", error)
     return null
   }
 }
@@ -181,7 +181,7 @@ export async function getAdverseEvents(medicineName: string): Promise<number> {
     const data = await response.json()
     return data.meta?.results?.total || 0
   } catch (error) {
-    console.error("[v0] Failed to fetch adverse events:", error)
+    console.error("Failed to fetch adverse events:", error)
     return 0
   }
 }
@@ -220,7 +220,7 @@ export async function checkInteractions(medicineNames: string[]): Promise<string
             }
           }
         } catch (error) {
-          console.error("[v0] Error checking pair interaction:", error)
+          console.error("Error checking pair interaction:", error)
           continue
         }
       }
@@ -228,7 +228,7 @@ export async function checkInteractions(medicineNames: string[]): Promise<string
 
     return [...new Set(interactions)] // Remove duplicates
   } catch (error) {
-    console.error("[v0] Failed to check interactions:", error)
+    console.error("Failed to check interactions:", error)
     return []
   }
 }
@@ -244,7 +244,7 @@ async function getRxCui(medicineName: string): Promise<string | null> {
     const data = await response.json()
     return data.drugGroup?.drugList?.drug?.[0]?.rxcui || null
   } catch (error) {
-    console.error("[v0] Failed to get RxCui:", error)
+    console.error("Failed to get RxCui:", error)
     return null
   }
 }
@@ -268,7 +268,7 @@ export async function validateMedicineExists(medicineName: string): Promise<bool
     const details = await getMedicineDetails(medicineName)
     return details !== null
   } catch (error) {
-    console.error("[v0] Failed to validate medicine:", error)
+    console.error("Failed to validate medicine:", error)
     return false
   }
 }

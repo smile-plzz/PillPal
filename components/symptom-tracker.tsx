@@ -29,7 +29,7 @@ export function SymptomTracker({ medicines }: SymptomTrackerProps) {
       try {
         setSymptoms(JSON.parse(saved))
       } catch (e) {
-        console.error("[v0] Failed to load symptoms:", e)
+        console.error("Failed to load symptoms:", e)
       }
     }
   }, [])

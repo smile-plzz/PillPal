@@ -49,7 +49,7 @@ export function MedicineForm({ onSave }: MedicineFormProps) {
       const results = await searchMedicines(query)
       setSuggestions(results)
     } catch (error) {
-      console.error("[v0] Failed to fetch suggestions:", error)
+      console.error("Failed to fetch suggestions:", error)
     }
   }, [])
 
@@ -96,12 +96,12 @@ export function MedicineForm({ onSave }: MedicineFormProps) {
               setInteractionWarning(null)
             }
           } catch (error) {
-            console.error("[v0] Failed to check interactions:", error)
+            console.error("Failed to check interactions:", error)
           }
         }
       }
     } catch (error) {
-      console.error("[v0] Failed to fetch medicine details:", error)
+      console.error("Failed to fetch medicine details:", error)
     } finally {
       setFetchingDetails(false)
     }

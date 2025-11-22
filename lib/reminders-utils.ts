@@ -2,7 +2,7 @@ import type { Medicine } from "./types"
 
 export function requestNotificationPermission(): Promise<boolean> {
   if (typeof window === "undefined" || !("Notification" in window)) {
-    console.log("[v0] Notifications not supported")
+    console.log("Notifications not supported")
     return Promise.resolve(false)
   }
 

@@ -26,7 +26,7 @@ export function saveBackup(backup: DataBackup): void {
 
     localStorage.setItem(BACKUP_KEY, JSON.stringify(backups))
   } catch (err) {
-    console.error("[v0] Failed to save backup:", err)
+    console.error("Failed to save backup:", err)
     throw new Error("Failed to save backup to local storage")
   }
 }
@@ -36,7 +36,7 @@ export function getBackupHistory(): DataBackup[] {
     const backups = localStorage.getItem(BACKUP_KEY)
     return backups ? JSON.parse(backups) : []
   } catch (err) {
-    console.error("[v0] Failed to load backup history:", err)
+    console.error("Failed to load backup history:", err)
     return []
   }
 }
@@ -48,7 +48,7 @@ export function restoreFromBackup(backup: DataBackup): void {
       localStorage.setItem("app-settings", JSON.stringify(backup.settings))
     }
   } catch (err) {
-    console.error("[v0] Failed to restore backup:", err)
+    console.error("Failed to restore backup:", err)
     throw new Error("Failed to restore backup")
   }
 }
@@ -63,7 +63,7 @@ export async function exportBackupAsJSON(backup: DataBackup): Promise<void> {
     a.click()
     URL.revokeObjectURL(url)
   } catch (err) {
-    console.error("[v0] Failed to export backup:", err)
+    console.error("Failed to export backup:", err)
     throw new Error("Failed to export backup")
   }
 }
@@ -101,7 +101,7 @@ export function autoBackup(medicines: Medicine[], settings?: AppSettings): void 
     const backup = createBackup(medicines, settings)
     saveBackup(backup)
   } catch (err) {
-    console.error("[v0] Auto backup failed:", err)
+    console.error("Auto backup failed:", err)
     // Don't throw - auto backup should fail silently
   }
 }

@@ -5,6 +5,14 @@ All notable changes to the Medicine Tracker application will be documented in th
 ## [2.0.0] - 2024-01-XX
 
 ### ✨ Added
+- **State Management**: Refactored to use React Context API for better data persistence and state synchronization.
+- **Configuration**: Added `.eslintrc.json` and updated `pnpm-lock.yaml`.
+
+### 🐛 Fixed
+- **Build Issues**: Fixed `framer-motion` dependency and Vercel output directory configuration.
+- **Data Persistence**: Resolved race conditions in `localStorage` updates.
+
+### ✨ Added
 - **Modern Dashboard**: Real-time statistics showing total medicines, today's doses, adherence rate, and next dose time
 - **Smart Notifications**: Browser notifications for medication reminders with customizable timing
 - **Search & Filter**: Find medicines quickly and filter by time periods (morning, afternoon, evening, night)

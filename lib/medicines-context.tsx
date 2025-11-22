@@ -34,7 +34,7 @@ export function MedicinesProvider({ children }: { children: React.ReactNode }) {
                 }
             }
         } catch (err) {
-            console.error("[v0] Failed to load medicines:", err)
+            console.error("Failed to load medicines:", err)
             setError(err instanceof Error ? err.message : "Failed to load medicines")
             setMedicines([])
         } finally {
@@ -49,7 +49,7 @@ export function MedicinesProvider({ children }: { children: React.ReactNode }) {
             setError(null)
         } catch (err) {
             const message = err instanceof Error ? err.message : "Failed to save medicines"
-            console.error("[v0] Save error:", message)
+            console.error("Save error:", message)
             setError(message)
         }
     }
