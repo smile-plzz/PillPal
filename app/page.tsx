@@ -194,10 +194,10 @@ export default function Home() {
           <TabsContent value="medicines" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-1">
-                <MedicineForm onSave={() => saveMedicines(medicines)} />
+                <MedicineForm />
               </div>
               <div className="lg:col-span-2">
-                <ScheduleTable medicines={medicines} onUpdate={() => saveMedicines(medicines)} />
+                <ScheduleTable medicines={medicines} />
               </div>
             </div>
           </TabsContent>
