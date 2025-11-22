@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -19,12 +20,13 @@ import { EmergencyCard } from "@/components/emergency-card"
 import { SymptomTracker } from "@/components/symptom-tracker"
 import { MedicineConditionSearch } from "@/components/medicine-condition-search"
 import { useToast } from "@/hooks/use-toast"
+import { motion } from "framer-motion"
 
 export default function Home() {
   const { toast } = useToast()
   const { medicines, saveMedicines } = useMedicines()
   const [showSettings, setShowSettings] = useState(false)
-  const [settings, setSettings] = useState({})
+  const [settings, setSettings] = useState<any>({})
 
   useEffect(() => {
     const appSettings = localStorage.getItem("app-settings")
@@ -135,16 +137,23 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto py-8 px-4">
-        <div className="flex items-center justify-between mb-8">
+    <main className="min-h-screen bg-background/50 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto py-8 px-4"
+      >
+        <div className="flex flex-col items-start justify-between mb-8 space-y-4 md:flex-row md:items-center md:space-y-0">
           <div>
-            <h1 className="text-4xl font-bold tracking-tight">Medicine Tracker</h1>
-            <p className="text-muted-foreground mt-2">Manage your daily medication schedule</p>
+            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl bg-gradient-to-r from-primary to-indigo-500 bg-clip-text text-transparent">
+              Medicine Tracker
+            </h1>
+            <p className="text-muted-foreground mt-2 text-lg">Manage your daily medication schedule with ease.</p>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={() => setShowSettings(true)}>
-              <Settings className="h-4 w-4" />
+            <Button variant="outline" size="icon" onClick={() => setShowSettings(true)} className="rounded-full hover:bg-primary/10">
+              <Settings className="h-5 w-5" />
             </Button>
           </div>
         </div>
@@ -228,7 +237,7 @@ export default function Home() {
             Reset Schedule
           </Button>
         </div>
-      </div>
+      </motion.div>
 
       <SettingsDialog open={showSettings} onOpenChange={setShowSettings} />
     </main>
